@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DatyOperacjiService } from './services/daty-operacji.service';
+import { StatusLicznikaFormularzaService } from './services/status-licznika-formularza.service';
 
 @Component({
   selector: 'app-root',
@@ -42,9 +43,15 @@ import { DatyOperacjiService } from './services/daty-operacji.service';
 export class AppComponent {
   ostatniePobranieListy$: Observable<Date | null>;
   ostatnieDodanie$: Observable<Date | null>;
+  liczbaZmianWidocznosciFormularza$: Observable<number>;
 
-  constructor(private readonly datyOperacjiService: DatyOperacjiService) {
+  constructor(
+    private readonly datyOperacjiService: DatyOperacjiService,
+    private readonly statusLicznikaFormularzaService: StatusLicznikaFormularzaService
+  ) {
     this.ostatniePobranieListy$ = this.datyOperacjiService.ostatniePobranieListy$;
     this.ostatnieDodanie$ = this.datyOperacjiService.ostatnieDodanie$;
+    this.liczbaZmianWidocznosciFormularza$ =
+      this.statusLicznikaFormularzaService.liczbaZmianWidocznosciFormularza$;
   }
 }
