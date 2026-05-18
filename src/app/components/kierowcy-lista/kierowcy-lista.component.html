@@ -1,0 +1,45 @@
+<section class="lista">
+  <h1>{{ tytul }}</h1>
+
+  <button type="button" (click)="przelaczFormularz()">
+    {{ czyPokazacFormularz ? 'Ukryj formularz' : 'Dodaj kierowce' }}
+  </button>
+
+  <p class="licznik-formularza">
+    Liczba zmian widocznosci formularza: {{ liczbaZmianWidocznosciFormularza }}
+  </p>
+
+  <app-kierowca-formularz
+    *ngIf="czyPokazacFormularz"
+    (dodanoKierowce)="dodajKierowce($event)"
+  ></app-kierowca-formularz>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Numer kierowcy</th>
+        <th>Data urodzenia</th>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>Akcje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let kierowca of kierowcy">
+        <td>{{ kierowca.id }}</td>
+        <td>{{ kierowca.numerKierowcy }}</td>
+        <td>{{ kierowca.dataUrodzenia | date: 'dd.MM.yyyy' }}</td>
+        <td>{{ kierowca.imie }}</td>
+        <td>{{ kierowca.nazwisko }}</td>
+        <td>
+          <button type="button" (click)="usunKierowce(kierowca.id)">
+            Usun
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="kierowcy.length === 0">Brak kierowcow do wyswietlenia.</p>
+</section>

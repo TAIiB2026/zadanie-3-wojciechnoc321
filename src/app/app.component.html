@@ -1,0 +1,31 @@
+<header class="status-dat">
+  <p>
+    Ostatnie pobranie listy:
+    <strong *ngIf="ostatniePobranieListy$ | async as ostatniePobranieListy; else brakPobrania">
+      {{ ostatniePobranieListy | date: 'dd.MM.yyyy HH:mm:ss' }}
+    </strong>
+  </p>
+
+  <p>
+    Ostatnie dodanie:
+    <strong *ngIf="ostatnieDodanie$ | async as ostatnieDodanie; else brakDodania">
+      {{ ostatnieDodanie | date: 'dd.MM.yyyy HH:mm:ss' }}
+    </strong>
+  </p>
+</header>
+
+<nav class="nawigacja">
+  <a routerLink="/kierowcy" routerLinkActive="aktywny">Kierowcy</a>
+  <a routerLink="/legendy" routerLinkActive="aktywny">Legendy</a>
+  <a routerLink="/testowi" routerLinkActive="aktywny">Testowi</a>
+</nav>
+
+<ng-template #brakPobrania>
+  <strong>brak</strong>
+</ng-template>
+
+<ng-template #brakDodania>
+  <strong>brak</strong>
+</ng-template>
+
+<router-outlet></router-outlet>

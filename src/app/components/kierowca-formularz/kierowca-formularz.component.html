@@ -1,0 +1,47 @@
+<form [formGroup]="formularz" (ngSubmit)="zapisz()" class="formularz">
+  <label>
+    Numer kierowcy
+    <input type="number" min="1" max="99" step="1" formControlName="numerKierowcy">
+  </label>
+  <p class="blad" *ngIf="formularz.controls.numerKierowcy.touched && formularz.controls.numerKierowcy.hasError('required')">
+    Numer kierowcy jest wymagany.
+  </p>
+  <p class="blad" *ngIf="formularz.controls.numerKierowcy.touched && formularz.controls.numerKierowcy.hasError('zakresNumeru')">
+    Numer kierowcy musi byc liczba calkowita od 1 do 99.
+  </p>
+
+  <label>
+    Data urodzenia
+    <input type="date" formControlName="dataUrodzenia">
+  </label>
+  <p class="blad" *ngIf="formularz.controls.dataUrodzenia.touched && formularz.controls.dataUrodzenia.hasError('required')">
+    Data urodzenia jest wymagana.
+  </p>
+  <p class="blad" *ngIf="formularz.controls.dataUrodzenia.touched && formularz.controls.dataUrodzenia.hasError('poprawnaData')">
+    Data urodzenia musi byc poprawna i nie moze byc z przyszlosci.
+  </p>
+
+  <label>
+    Imie
+    <input type="text" formControlName="imie">
+  </label>
+  <p class="blad" *ngIf="formularz.controls.imie.touched && formularz.controls.imie.hasError('required')">
+    Imie jest wymagane.
+  </p>
+  <p class="blad" *ngIf="formularz.controls.imie.touched && formularz.controls.imie.hasError('duzaLitera')">
+    Imie musi zaczynac sie od duzej litery.
+  </p>
+
+  <label>
+    Nazwisko
+    <input type="text" formControlName="nazwisko">
+  </label>
+  <p class="blad" *ngIf="formularz.controls.nazwisko.touched && formularz.controls.nazwisko.hasError('required')">
+    Nazwisko jest wymagane.
+  </p>
+  <p class="blad" *ngIf="formularz.controls.nazwisko.touched && formularz.controls.nazwisko.hasError('duzaLitera')">
+    Nazwisko musi zaczynac sie od duzej litery.
+  </p>
+
+  <button type="submit" [disabled]="formularz.invalid">Dodaj kierowce</button>
+</form>
